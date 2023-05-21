@@ -1,15 +1,16 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import Main from './pages/Main/index.jsx';
-import UserInfo from './pages/UserInfo/index.jsx';
-import UserDetails from './pages/UserDetails/index.jsx'; 
+import AboutMe from './pages/AboutMe/index.jsx';
+import User from './pages/User/index.jsx'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={<Main />} />
-        <Route path={'/user'} element={<UserInfo />} />
-        <Route path={'/details'} element={<UserDetails />} />
+        <Route path={'/aboutMe'} element={<AboutMe />} />
+        <Route path={'/user/:id'} element={<User />} />
 
         <Route path='*' element={<Main />} />
       </Routes>
