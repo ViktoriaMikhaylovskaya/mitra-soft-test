@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { Nav , Offcanvas, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
 import PostCard from "../../components/PostCard";
+import Menu from "../../components/Menu";
+import { NAV_LINKS } from '../../pages/Main/constants';
 
 function Main() {
   const [data, setData] = useState([]);
   const [comments, setComments] = useState([]);
   const [openedComments, setOpenedComments] = useState();
   const [isOpenComments, setIsOpenComments] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+  const [isShowMenu, setIsShowMenu] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClose = () => setShowMenu(false);
-  const handleShow = () => setShowMenu(true);
-
+  const showMenuHandler = () => setIsShowMenu(!isShowMenu);
 
   const dataFetch = async () => {
     setIsLoading(true)
@@ -43,28 +43,8 @@ function Main() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: "10px", alignItems: 'center' }}>
 
-      <Header onClick={handleShow} title='Posts' buttonText='Menu'/>
-
-      <Offcanvas show={showMenu} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div>
-            <img src="" alt="avatar" />
-            <p>name</p>
-            <p>email</p>
-          </div>
-          <Nav className="flex-column">
-            <Nav.Item>
-              <Nav.Link href="/" eventKey="main">Posts</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/aboutMe" eventKey="aboutMe">About Me</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Offcanvas.Body>
-      </Offcanvas>
+      <Header onClick={showMenuHandler} title='Posts' buttonText='Menu' />
+      <Menu isShow={isShowMenu} handleClose={showMenuHandler} links={NAV_LINKS} />
       
       {isLoading
         ? <Spinner animation="border" variant="primary" />
