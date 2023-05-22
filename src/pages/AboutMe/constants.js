@@ -1,0 +1,20 @@
+export const SKILLS = [
+    'Огромное желание к развитию',
+    'HTML',
+    'CSS',
+    'JavaScript',
+    'Less',
+    'Git',
+    'Figma',
+    'React',
+    'Material UI',
+    'styled-components',
+    'Formik',
+    'Yup',
+    'TypeScript',
+    'Redux',
+    'Sass',
+    'ReactJS',
+    'БЭМ',
+    'ООП'
+]

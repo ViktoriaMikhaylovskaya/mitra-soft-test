@@ -1,0 +1,7 @@
+export const ACTIONS = {
+    GET_POSTS: 'GET_POSTS',
+    SET_POSTS: 'SET_POSTS',
+
+    GET_COMMENTS: 'GET_COMMENTS',
+    SET_COMMENTS: 'SET_COMMENTS',
+}

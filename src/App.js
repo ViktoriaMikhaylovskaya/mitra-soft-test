@@ -3,6 +3,10 @@ import Main from './pages/Main/index.jsx';
 import AboutMe from './pages/AboutMe/index.jsx';
 import User from './pages/User/index.jsx'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import store from './redux/store.js';
+import { getPosts } from './redux/actions/actionCreator.js';
+
+store.dispatch(getPosts());
 
 function App() {
   return (

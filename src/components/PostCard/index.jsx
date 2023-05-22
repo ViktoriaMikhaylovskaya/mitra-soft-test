@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import userIcon from '../../images/user-icon.svg'
 
-function PostCard({ post, commentsButtonClick, isShowComments, comments }) {
+function PostCard({ post, commentsButtonClick, isShowComments, comments = [] }) {
     const navigate = useNavigate();
+    
     return (
         <Card style={{ width: 'auto' }}>
             <Card.Body>
