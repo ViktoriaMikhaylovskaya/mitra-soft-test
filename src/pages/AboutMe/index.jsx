@@ -64,7 +64,7 @@ function AboutMe() {
               
               <ol>
                 {PROJECTS.map((el) => (
-                  <li>
+                  <li key={el.link}>
                     <span>{el.title} </span>
                     <Badge bg="info">
                       <Link href={el.link} target="blank">GitHub</Link>
@@ -74,10 +74,27 @@ function AboutMe() {
                 ))}
               </ol>
 
-              <p>
-                Так же есть самостоятельно выполненные тестовые задания. Все можно посмотреть в моём
-                <a href="https://github.com/ViktoriaMikhaylovskaya" target="blank"> GitHub профиле</a>
-              </p>
+              <div>
+                <span>Так же есть самостоятельно выполненные тестовые задания. Могут быть интересны:</span>
+                <ul>
+                  <li>
+                    <span>TODO-list </span>
+                    <Badge bg="primary">
+                      <Link href='https://github.com/ViktoriaMikhaylovskaya/woman-up-test' target="blank">GitHub</Link>
+                    </Badge> {' '}
+                    <Badge bg="primary">
+                      <Link href='https://viktoriamikhaylovskaya.github.io/woman-up-test/' target="blank">Развернутый сайт</Link>
+                    </Badge>
+                  </li>
+                  <li>
+                    <span>Сайт для поиска книг, который можно запустить через Docker. </span>
+                    <Badge bg="primary">
+                      <Link href='https://github.com/ViktoriaMikhaylovskaya/feature-test' target="blank">GitHub</Link>
+                    </Badge>
+                  </li>
+                </ul>
+                <p>Остальное можно посмотреть в моём <a href="https://github.com/ViktoriaMikhaylovskaya" target="blank"> GitHub профиле</a>.</p>
+              </div>
             </div>
           </Accordion.Body>
         </Accordion.Item>
@@ -100,7 +117,7 @@ function AboutMe() {
                   <li>Выполняла всю работу по системным требованиям и бизнес требованиям;</li>
                   <li>Конечно же общалась с аналитиками, бэками, дизайнером и другими.</li>
                 </ol>
-
+                <br/>
                 <p>В ВТБ стэк: React, Redux, TypeScript, style-components.</p>
               </div>
             </SkillsWrapper>
@@ -112,7 +129,7 @@ function AboutMe() {
           <Accordion.Body>
             <SkillsWrapper>
               {SKILLS.map((el) => (
-                <SkillsItem variant="primary">{el}</SkillsItem>
+                <SkillsItem key={el} variant="primary">{el}</SkillsItem>
               ))}
             </SkillsWrapper>
           </Accordion.Body>
