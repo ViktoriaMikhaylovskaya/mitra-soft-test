@@ -8,3 +8,6 @@ export const NAV_LINKS = [
         title: 'About Me'
     }
 ]
+
+export const NAME = 'Виктория';
+export const EMAIL = 'mviktoria065@gmail.com';

@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import userIcon from '../../images/user-icon.svg'
+import { CardWrapper, CardImage } from './styles';
 
 function PostCard({ post, commentsButtonClick, isShowComments, comments = [] }) {
     const navigate = useNavigate();
     
     return (
-        <Card style={{ width: 'auto' }}>
+        <CardWrapper>
             <Card.Body>
                 <Card.Title>
-                    <Card.Img
-                        style={{ width: '40px', marginRight: '10px', cursor: 'pointer' }}
+                    <CardImage
                         onClick={() => navigate(`/user/${post.id}`)}
                         src={userIcon}
                         variant="top"
@@ -19,7 +19,6 @@ function PostCard({ post, commentsButtonClick, isShowComments, comments = [] }) 
                 </Card.Title>
                 <Card.Text>{post.body}</Card.Text>
                 <Button
-                    style={{ marginTop: 'auto' }}
                     variant="primary"
                     onClick={commentsButtonClick}>
                     {isShowComments ? 'Скрыть комментарии' : 'Показать комментарии'}
@@ -32,7 +31,7 @@ function PostCard({ post, commentsButtonClick, isShowComments, comments = [] }) 
                     </div>
                 ))}
             </Card.Body>
-        </Card>
+        </CardWrapper>
   );
 }
 

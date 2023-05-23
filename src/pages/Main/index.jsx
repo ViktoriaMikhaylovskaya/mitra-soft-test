@@ -5,6 +5,7 @@ import PostCard from "../../components/PostCard";
 import Menu from "../../components/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../redux/actions/actionCreator";
+import { PageWrapper, CardWrapper } from './styles';
 
 function Main() {
   const dispatch = useDispatch();
@@ -23,27 +24,27 @@ function Main() {
   }
     
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: "10px", alignItems: 'center' }}>
+    <PageWrapper>
 
       <Header onClick={showMenuHandler} title='Posts' buttonText='Menu' />
       <Menu isShow={isShowMenu} handleClose={showMenuHandler} />
       
       {isLoading
         ? <Spinner animation="border" variant="primary" />
-        : <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
-          {posts && posts.length > 0 && posts.map((post) => (
-            <PostCard
-              key={post.id}
-              post={post}
-              commentsButtonClick={() => showCommentsHandler(post.id)}
-              isShowComments={isOpenComments && openedComments === post.id}
-              comments={comments ? comments : []}
-            />
-          ))}
-        </div>
+        : <CardWrapper>
+            {posts && posts.length > 0 && posts.map((post) => (
+              <PostCard
+                key={post.id}
+                post={post}
+                commentsButtonClick={() => showCommentsHandler(post.id)}
+                isShowComments={isOpenComments && openedComments === post.id}
+                comments={comments ? comments : []}
+              />
+            ))}
+        </CardWrapper>
       }
 
-    </div>
+    </PageWrapper>
   );
 }
 

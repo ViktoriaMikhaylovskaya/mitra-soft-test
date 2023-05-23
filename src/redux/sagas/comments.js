@@ -8,10 +8,6 @@ export function* fetchCommentsWorker(action) {
     yield put(setComments(data));
 }
 
-export function* workerSaga() {
-    yield call(fetchCommentsWorker);
-}
-
 export function* commentWatcher() {
     yield takeEvery(ACTIONS.GET_COMMENTS, fetchCommentsWorker);
 }  

@@ -1,13 +1,13 @@
-import { Button } from 'react-bootstrap';
+import { HeaderWrapper, Title, Button } from './styles';
 
 function Header({ onClick, title, buttonText }) {
   return (
-    <div style={{display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
-        <h2 style={{margin: '10px 16px'}}>{title}</h2>
-        <Button style={{width: '160px', fontSize: '18px'}} variant="primary" onClick={onClick}>
+    <HeaderWrapper>
+        <Title>{title}</Title>
+        <Button variant="primary" onClick={onClick}>
           {buttonText}
         </Button>
-    </div>
+    </HeaderWrapper>
   );
 }
 

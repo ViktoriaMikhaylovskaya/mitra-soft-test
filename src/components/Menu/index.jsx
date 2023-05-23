@@ -1,9 +1,7 @@
 import { Nav, Offcanvas } from 'react-bootstrap';
 import myAvatar from '../../images/main-avatar.jpg';
-import { NAV_LINKS } from './constants';
-
-const NAME = 'Виктория';
-const EMAIL = 'mviktoria065@gmail.com';
+import { NAV_LINKS, NAME, EMAIL } from './constants';
+import { HeaderWrapper, Avatar } from './styles';
 
 function Menu({isShow, handleClose}) {
   return (
@@ -12,13 +10,13 @@ function Menu({isShow, handleClose}) {
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-            <div style={{display: 'flex', border: '1px solid grey', padding: '10px', borderRadius: '15px', marginBottom: '20px'}}>
-                <img src={myAvatar} alt="avatar" style={{ width: '150px', height: '100px' }} />
+            <HeaderWrapper>
+                <Avatar src={myAvatar} alt="avatar"/>
                 <div>
                     <h4>{NAME}</h4>
                     <p>{EMAIL}</p>
                 </div>
-            </div>
+            </HeaderWrapper>
             <Nav className="flex-column">
                 {NAV_LINKS.map((el) => (
                     <Nav.Item key={el.title}>
