@@ -1,10 +1,12 @@
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Spinner } from 'react-bootstrap';
 import userIcon from '../../images/user-icon.svg'
-import { CardWrapper, CardImage } from './styles';
+import { CardWrapper, CardImage, CommentsContainer, Comment, Button } from './styles';
 
-function PostCard({ post, commentsButtonClick, isShowComments, comments = [] }) {
+function PostCard({ post, commentsButtonClick, isShowComments}) {
     const navigate = useNavigate();
+    const { isLoadingComments, comments } = useSelector((state) => state.comments);
     
     return (
         <CardWrapper>
@@ -20,16 +22,24 @@ function PostCard({ post, commentsButtonClick, isShowComments, comments = [] }) 
                 <Card.Text>{post.body}</Card.Text>
                 <Button
                     variant="primary"
-                    onClick={commentsButtonClick}>
+                    onClick={commentsButtonClick}
+                    disabled={isLoadingComments}
+                >
                     {isShowComments ? 'Скрыть комментарии' : 'Показать комментарии'}
                 </Button>
 
-                {isShowComments && comments.map((el, i) => (
-                    <div key={post.id + i + i}>
-                    <h4>{el.email}</h4>
-                    <p>{el.body}</p>
-                    </div>
-                ))}
+                {isShowComments &&
+                    <CommentsContainer>
+                        {isLoadingComments
+                            ? <Spinner animation="border" variant="primary" />
+                            : comments.map((el, i) => (
+                                <Comment key={post.id + i}>
+                                    <h4>{el.email}</h4>
+                                    <p>{el.body}</p>
+                                </Comment>
+                            ))}
+                    </CommentsContainer>
+                }
             </Card.Body>
         </CardWrapper>
   );

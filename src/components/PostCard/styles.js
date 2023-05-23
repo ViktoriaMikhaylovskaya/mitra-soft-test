@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from 'react-bootstrap';
+import { Card, Button as UIButton } from 'react-bootstrap';
 
 export const CardWrapper = styled(Card)`
     width: auto;
@@ -10,4 +10,17 @@ export const CardImage = styled(Card.Img)`
     width: 40px;
     margin-right: 10px;
     cursor: pointer; 
+`
+
+export const Button = styled(UIButton)`
+    margin-bottom: 10px;
+`
+
+export const CommentsContainer = styled.div`
+    padding: 10px;
+    border: 1px solid blue;
+    border-radius: 15px;
+`
+
+export const Comment = styled.div`
 `

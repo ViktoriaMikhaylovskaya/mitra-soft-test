@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from 'react-bootstrap';
 import Header from "../../components/Header";
 import PostCard from "../../components/PostCard";
 import Menu from "../../components/Menu";
-import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../../redux/actions/actionCreator";
+import { getComments, getPosts } from "../../redux/actions/actionCreator";
 import { PageWrapper, CardWrapper } from './styles';
 
 function Main() {
   const dispatch = useDispatch();
-  const {posts, comments} = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
   const [openedComments, setOpenedComments] = useState();
   const [isOpenComments, setIsOpenComments] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const showMenuHandler = () => setIsShowMenu(!isShowMenu);
 
@@ -22,6 +21,10 @@ function Main() {
     dispatch(getComments(id));
     setIsOpenComments(!isOpenComments);
   }
+
+  useEffect(() => { 
+    dispatch(getPosts())
+  }, [])
     
   return (
     <PageWrapper>
@@ -38,7 +41,6 @@ function Main() {
                 post={post}
                 commentsButtonClick={() => showCommentsHandler(post.id)}
                 isShowComments={isOpenComments && openedComments === post.id}
-                comments={comments ? comments : []}
               />
             ))}
         </CardWrapper>

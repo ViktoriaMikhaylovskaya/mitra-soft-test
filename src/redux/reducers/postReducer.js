@@ -2,7 +2,8 @@ import { ACTIONS } from "../constants";
 
 const initialState = {
     posts: [],
-    comments: [],
+    userPosts: [],
+    isLoading: false,
 }
 
 
@@ -11,12 +12,14 @@ export const postsReducer = (state = initialState, { type, payload}) => {
         case ACTIONS.SET_POSTS:
             return {
                 ...state,
-                posts: payload,
+                posts: payload.data,
+                isLoading: payload.loading,
             };
-        case ACTIONS.SET_COMMENTS:
+        case ACTIONS.SET_USER_POSTS:
             return {
                 ...state,
-                comments: payload,
+                userPosts: payload.data,
+                isLoading: payload.loading,
             };
         default: return state;
     }

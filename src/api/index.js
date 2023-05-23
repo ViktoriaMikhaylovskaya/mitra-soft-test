@@ -1,11 +1,16 @@
+const URL = 'https://jsonplaceholder.typicode.com/posts';
+
 export const getPosts = async () => { 
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const response = await fetch(URL);
     return await response.json();
 }
 
 export const getComments = async (id) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
+    const response = await fetch(`${URL}/${id}/comments`);
     return await response.json();
 }
 
-// https://jsonplaceholder.typicode.com/posts?userId=3
+export const getUserPosts = async (id) => {
+    const response = await fetch(`${URL}?userId=${id}`);
+    return await response.json();
+}

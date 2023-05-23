@@ -5,6 +5,8 @@ export const PageWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
 `
 
 export const CardWrapper = styled.div`
