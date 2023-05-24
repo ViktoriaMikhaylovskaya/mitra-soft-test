@@ -17,7 +17,7 @@ export const AccordionContainer = styled(UIAccordion)`
 export const Avatar = styled.img`
     width: 300px;
     height: 200px;
-    border: 1px solid blue;
+    border: 1px solid green;
     margin-right: 20px;
     border-radius: 15px;
 `

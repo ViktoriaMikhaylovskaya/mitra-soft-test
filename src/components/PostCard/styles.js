@@ -18,7 +18,7 @@ export const Button = styled(UIButton)`
 
 export const CommentsContainer = styled.div`
     padding: 10px;
-    border: 1px solid blue;
+    border: 1px solid grey;
     border-radius: 15px;
 `
 

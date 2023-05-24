@@ -1,7 +1,7 @@
 import { Nav, Offcanvas } from 'react-bootstrap';
-import myAvatar from '../../images/main-avatar.jpg';
-import { NAV_LINKS, NAME, EMAIL } from './constants';
+import { NAVIGATION_LIST, NAME, EMAIL } from './constants';
 import { HeaderWrapper, Avatar } from './styles';
+import myAvatar from '../../images/main-avatar.jpg';
 
 function Menu({isShow, handleClose}) {
   return (
@@ -18,8 +18,8 @@ function Menu({isShow, handleClose}) {
                 </div>
             </HeaderWrapper>
             <Nav className="flex-column">
-                {NAV_LINKS.map((el) => (
-                    <Nav.Item key={el.title}>
+                {NAVIGATION_LIST.map((el) => (
+                    <Nav.Item key={el.link}>
                         <Nav.Link href={el.link} eventKey="main">{el.title}</Nav.Link>
                     </Nav.Item>
                 ))}

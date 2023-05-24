@@ -1,25 +1,36 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from 'react-bootstrap';
+import { PageWrapper, CardWrapper } from './styles';
 import Header from "../../components/Header";
 import PostCard from "../../components/PostCard";
 import Menu from "../../components/Menu";
 import { getComments, getPosts } from "../../redux/actions/actionCreator";
-import { PageWrapper, CardWrapper } from './styles';
 
 function Main() {
   const dispatch = useDispatch();
   const { posts, isLoading } = useSelector((state) => state.posts);
-  const [openedComments, setOpenedComments] = useState();
   const [isOpenComments, setIsOpenComments] = useState(false);
+  const [postIdWithOpenedComments, setPostIdWithOpenedComments] = useState();
   const [isShowMenu, setIsShowMenu] = useState(false);
 
   const showMenuHandler = () => setIsShowMenu(!isShowMenu);
 
-  const showCommentsHandler = (id) => { 
-    setOpenedComments(id);
+  const loadComments = (id) => { 
+    setPostIdWithOpenedComments(id);
+    setIsOpenComments(true);
     dispatch(getComments(id));
-    setIsOpenComments(!isOpenComments);
+  }
+
+  const showCommentsHandler = (id) => { 
+    if (isOpenComments) {
+      setIsOpenComments(false);
+      if (id !== postIdWithOpenedComments) {
+        loadComments(id);
+      }
+    } else {
+      loadComments(id);
+    }
   }
 
   useEffect(() => { 
@@ -40,7 +51,7 @@ function Main() {
                 key={post.id}
                 post={post}
                 commentsButtonClick={() => showCommentsHandler(post.id)}
-                isShowComments={isOpenComments && openedComments === post.id}
+                isShowComments={isOpenComments && postIdWithOpenedComments === post.id}
               />
             ))}
         </CardWrapper>

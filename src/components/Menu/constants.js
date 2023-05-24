@@ -1,4 +1,4 @@
-export const NAV_LINKS = [
+export const NAVIGATION_LIST = [
     {
         link: '/',
         title: 'Posts'

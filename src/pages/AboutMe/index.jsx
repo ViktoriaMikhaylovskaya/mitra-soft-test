@@ -3,7 +3,7 @@ import { Accordion, Badge } from 'react-bootstrap';
 import Header from "../../components/Header";
 import Menu from "../../components/Menu";
 import myAvatar from '../../images/main-avatar.jpg';
-import { PROJECTS, SKILLS } from "./constants";
+import { PROJECTS, SKILLS, STACK } from "./constants";
 import {
   PageWrapper,
   MainInfoContainer,
@@ -118,7 +118,7 @@ function AboutMe() {
                   <li>Конечно же общалась с аналитиками, бэками, дизайнером и другими.</li>
                 </ol>
                 <br/>
-                <p>В ВТБ стэк: React, Redux, TypeScript, style-components.</p>
+                <p>В ВТБ стэк: {STACK}.</p>
               </div>
             </SkillsWrapper>
           </Accordion.Body>
@@ -141,9 +141,9 @@ function AboutMe() {
             <p>После того, как я подтяну знания по всем инструментам на новой работе, в планах:</p>
             <ul>
               <li>Глубже разобраться в SSR, изучить Next;</li>
-              <li>Глубже разобраться со сборками проекта (webpak, gulp);</li>
-              <li>изучить React Native;</li>
-              <li>Глубже изучить Jest;</li>
+              <li>Глубже разобраться со сборками проекта (webpak);</li>
+              <li>Глубже изучить тестирование (Jest, React Testing Library);</li>
+              <li>Изучить React Native;</li>
             </ul>
           </Accordion.Body>
         </Accordion.Item>
