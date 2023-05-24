@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mitra-soft-test/static/css/main.c2cab247.css",
-    "main.js": "/mitra-soft-test/static/js/main.0f88014d.js",
+    "main.js": "/mitra-soft-test/static/js/main.693822d1.js",
     "static/media/main-avatar.jpg": "/mitra-soft-test/static/media/main-avatar.c13df91c72b2494763f9.jpg",
     "static/media/user-icon.svg": "/mitra-soft-test/static/media/user-icon.40bc63e9320236c8095fd0774ad4b35a.svg",
     "index.html": "/mitra-soft-test/index.html",
     "main.c2cab247.css.map": "/mitra-soft-test/static/css/main.c2cab247.css.map",
-    "main.0f88014d.js.map": "/mitra-soft-test/static/js/main.0f88014d.js.map"
+    "main.693822d1.js.map": "/mitra-soft-test/static/js/main.693822d1.js.map"
   },
   "entrypoints": [
     "static/css/main.c2cab247.css",
-    "static/js/main.0f88014d.js"
+    "static/js/main.693822d1.js"
   ]
 }
