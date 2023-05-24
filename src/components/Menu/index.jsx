@@ -1,6 +1,6 @@
 import { Nav, Offcanvas } from 'react-bootstrap';
 import { NAVIGATION_LIST, NAME, EMAIL } from './constants';
-import { HeaderWrapper, Avatar } from './styles';
+import { HeaderWrapper, Avatar, HeaderInfo } from './styles';
 import myAvatar from '../../images/main-avatar.jpg';
 
 function Menu({isShow, handleClose}) {
@@ -12,10 +12,10 @@ function Menu({isShow, handleClose}) {
         <Offcanvas.Body>
             <HeaderWrapper>
                 <Avatar src={myAvatar} alt="avatar"/>
-                <div>
+                  <HeaderInfo>
                     <h4>{NAME}</h4>
                     <p>{EMAIL}</p>
-                </div>
+                </HeaderInfo>
             </HeaderWrapper>
             <Nav className="flex-column">
                 {NAVIGATION_LIST.map((el) => (

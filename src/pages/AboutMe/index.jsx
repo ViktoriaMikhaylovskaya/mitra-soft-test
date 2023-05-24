@@ -15,7 +15,8 @@ import {
   Social,
   Text,
   Link,
-  Description
+  Description,
+  Info
 } from './styles';
 
 function AboutMe() {
@@ -32,7 +33,7 @@ function AboutMe() {
 
       <MainInfoContainer>
         <Avatar src={myAvatar} alt="my avatar"/>
-        <div>
+        <Info>
           <h2>Михайловская Виктория <Badge bg="success">Frontend Developer</Badge></h2>
           
           <p>22 года (20.07.200)</p>
@@ -51,7 +52,7 @@ function AboutMe() {
             <Social>GitHub:</Social>
             <Text>https://github.com/ViktoriaMikhaylovskaya</Text>
           </SocialBlock>
-        </div>
+        </Info>
       </MainInfoContainer>
 
       <AccordionContainer>

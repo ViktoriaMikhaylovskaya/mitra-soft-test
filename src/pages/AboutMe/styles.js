@@ -8,6 +8,7 @@ export const PageWrapper = styled.div`
 
 export const MainInfoContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
 `
 
 export const AccordionContainer = styled(UIAccordion)`
@@ -20,6 +21,10 @@ export const Avatar = styled.img`
     border: 1px solid green;
     margin-right: 20px;
     border-radius: 15px;
+`
+
+export const Info = styled.div`
+    max-width: 850px;
 `
 
 export const SkillsWrapper = styled.ul`
