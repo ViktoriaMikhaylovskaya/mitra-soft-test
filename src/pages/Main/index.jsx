@@ -16,7 +16,10 @@ function Main() {
   const [postIdWithOpenedComments, setPostIdWithOpenedComments] = useState();
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [currentPage, setCurrentPage] = useState(0);
+  const [startIndexForPagination, setStartIndexForPagination] = useState(1);
+  const [elementsPerStep, setElementsPerStep] = useState(0);
+
+  const step = 5;
 
   const showMenuHandler = () => setIsShowMenu(!isShowMenu);
 
@@ -40,20 +43,16 @@ function Main() {
   const searchPostsByTitle = () => { 
     dispatch(getPosts({
       searchValue: searchValue ? `?title_like=${searchValue}` : '',
-      page: searchValue ? `&_start=${currentPage}&_limit=5` : `?_start=${currentPage}&_limit=5`
+      page: searchValue ? `&_start=${elementsPerStep}&_limit=5` : `?_start=${elementsPerStep}&_limit=5`
     }));
   }
 
-  useEffect(() => {
+  useEffect(() => { 
     searchPostsByTitle();
     dispatch(getPostsCount({
-      searchValue: searchValue ? `?title_like=!!!!` : '',
+      searchValue: searchValue ? `?title_like=${searchValue}` : '',
     }));
-  }, []);
-
-  useEffect(() => { 
-    searchPostsByTitle(searchValue, currentPage);
-  }, [searchValue, currentPage])
+  }, [searchValue, elementsPerStep])
     
   return (
       <PageWrapper>
@@ -64,8 +63,9 @@ function Main() {
             placeholder="Search"
             value={searchValue}
             onChange={(e) => {
-              setCurrentPage(0);
+              setElementsPerStep(0);
               setSearchValue(e.target.value);
+              setStartIndexForPagination(1);
             }}
           />
 
@@ -73,7 +73,8 @@ function Main() {
             variant="light"
             onClick={() => { 
               setSearchValue('');
-              setCurrentPage(0);
+              setElementsPerStep(0);
+              setStartIndexForPagination(1);
             }}>
             <img src={clearIcon} alt="Очистка" width={30}/>
           </Button>
@@ -95,10 +96,21 @@ function Main() {
         }
 
         <Pagination size='lg'>
-          <Pagination.Prev disabled={currentPage === 0} onClick={() => setCurrentPage(currentPage-1)}/>
-          <Pagination.Item>{currentPage + 1}</Pagination.Item>
-          {postsCount > 4 && <Pagination.Ellipsis />}
-          <Pagination.Next disabled={currentPage === Math.ceil(postsCount/5)} onClick={() => setCurrentPage(currentPage+1)}/>
+          <Pagination.Prev
+            disabled={startIndexForPagination === 1}
+            onClick={() => {
+              setElementsPerStep(elementsPerStep- step);
+              setStartIndexForPagination(startIndexForPagination - 1);
+            }} />
+
+          <Pagination.Item>{startIndexForPagination}</Pagination.Item>
+          
+          <Pagination.Next
+            disabled={startIndexForPagination === Math.ceil(postsCount / 5)}
+            onClick={() => {
+              setElementsPerStep(elementsPerStep + step);
+              setStartIndexForPagination(startIndexForPagination + 1);
+            }} />
         </Pagination>
 
       </PageWrapper>
