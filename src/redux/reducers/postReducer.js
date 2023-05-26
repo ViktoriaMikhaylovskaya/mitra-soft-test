@@ -4,6 +4,7 @@ const initialState = {
     posts: [],
     userPosts: [],
     isLoading: false,
+    postsCount: 0,
 }
 
 
@@ -20,6 +21,11 @@ export const postsReducer = (state = initialState, { type, payload}) => {
                 ...state,
                 userPosts: payload.data,
                 isLoading: payload.loading,
+            };
+        case ACTIONS.SET_COUNT_POSTS:
+            return {
+                ...state,
+                postsCount: payload.postsCount,
             };
         default: return state;
     }

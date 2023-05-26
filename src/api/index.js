@@ -1,7 +1,12 @@
 const URL = 'https://jsonplaceholder.typicode.com/posts';
 
-export const getPosts = async () => { 
-    const response = await fetch(URL);
+export const getCountPosts = async (searchValue) => {
+    const response = await fetch(`${URL}${searchValue}`);
+    return await response.json();
+}
+
+export const getPosts = async (queries) => {
+    const response = await fetch(`${URL}${queries.searchValue}${queries.page}`);
     return await response.json();
 }
 
