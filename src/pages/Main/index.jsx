@@ -110,7 +110,7 @@ function Main() {
       {posts?.length === 0 && searchValue && <NotFoundMessage>Ничего не найдено.</NotFoundMessage>}
 
         {posts?.length > 0 && 
-          <Pagination size='lg'>
+        <Pagination size='lg'>
             <Pagination.Prev
               disabled={startIndexForPagination === 1}
               onClick={() => {
