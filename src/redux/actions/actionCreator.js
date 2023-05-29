@@ -33,14 +33,19 @@ export const setComments = (payload) => ({
 })
 
 // actions for get all user posts
-export const getUserPosts = (id) => ({
+export const getUserPosts = (queries) => ({
     type: ACTIONS.GET_USER_POSTS,
-    id
+    queries
 })
 
 export const setUserPosts = (payload) => ({
     type: ACTIONS.SET_USER_POSTS,
     payload
+})
+
+export const getCountUserPosts = (id) => ({
+    type: ACTIONS.GET_USER_POSTS,
+    id
 })
 
 // actions for get posts by search value

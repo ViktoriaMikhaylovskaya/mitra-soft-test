@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { ROUTE_LIST } from './constant.js';
+import { ROUTE_LIST } from './constants.js';
 import { GlobalStyle } from "./styles";
 
 function App() {

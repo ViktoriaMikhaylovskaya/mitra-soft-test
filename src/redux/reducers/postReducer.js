@@ -21,6 +21,7 @@ export const postsReducer = (state = initialState, { type, payload}) => {
                 ...state,
                 userPosts: payload.data,
                 isLoading: payload.loading,
+                countUserPosts: payload.countUserPosts
             };
         case ACTIONS.SET_COUNT_POSTS:
             return {

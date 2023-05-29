@@ -4,7 +4,7 @@ import { Card, Spinner } from 'react-bootstrap';
 import userIcon from '../../images/user-icon.svg'
 import { CardWrapper, CardImage, CommentsContainer, Comment, Button } from './styles';
 
-function PostCard({ post, commentsButtonClick, isShowComments}) {
+function PostCard({ post, commentsButtonClick, isShowComments, isHaveLink}) {
     const navigate = useNavigate();
     const { isLoadingComments, comments } = useSelector((state) => state.comments);
     
@@ -13,7 +13,7 @@ function PostCard({ post, commentsButtonClick, isShowComments}) {
             <Card.Body>
                 <Card.Title>
                     <CardImage
-                        onClick={() => navigate(`/user/${post.id}`)}
+                        onClick={() => isHaveLink && navigate(`/user/${post.id}`)}
                         src={userIcon}
                         variant="top"
                     />

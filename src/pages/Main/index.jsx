@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Pagination, Spinner } from 'react-bootstrap';
-import { PageWrapper, CardWrapper, SearchWrapper, Search } from './styles';
+import { Button, Pagination, Spinner, Dropdown } from 'react-bootstrap';
+import { PageWrapper, CardWrapper, SearchWrapper, Search, Sort, SearchInput, NotFoundMessage } from './styles';
+import { SORTING, ELEMENTS_PER_STEP } from '../../constants';
+import { getQueriesBySort } from "../../utils";
+import clearIcon from '../../images/clear-icon.svg';
 import Header from "../../components/Header";
 import PostCard from "../../components/PostCard";
 import Menu from "../../components/Menu";
-import clearIcon from '../../images/clear-icon.svg';
-
 import { getComments, getPosts, getPostsCount } from "../../redux/actions/actionCreator";
 
 function Main() {
@@ -18,8 +19,7 @@ function Main() {
   const [searchValue, setSearchValue] = useState('');
   const [startIndexForPagination, setStartIndexForPagination] = useState(1);
   const [elementsPerStep, setElementsPerStep] = useState(0);
-
-  const step = 5;
+  const [sortType, setSortType] = useState(SORTING.DEFAULT);
 
   const showMenuHandler = () => setIsShowMenu(!isShowMenu);
 
@@ -41,44 +41,55 @@ function Main() {
   }
 
   const searchPostsByTitle = () => { 
+    const sort = getQueriesBySort(sortType);
     dispatch(getPosts({
-      searchValue: searchValue ? `?title_like=${searchValue}` : '',
-      page: searchValue ? `&_start=${elementsPerStep}&_limit=5` : `?_start=${elementsPerStep}&_limit=5`
+      page: `?_start=${elementsPerStep}&_limit=5`,
+      searchValue: searchValue ? `&title_like=${searchValue}` : '',
+      sort
     }));
   }
 
-  useEffect(() => { 
+  useEffect(() => {
     searchPostsByTitle();
     dispatch(getPostsCount({
       searchValue: searchValue ? `?title_like=${searchValue}` : '',
     }));
-  }, [searchValue, elementsPerStep])
+  }, [searchValue, elementsPerStep, sortType])
     
   return (
       <PageWrapper>
         <Menu isShow={isShowMenu} handleClose={showMenuHandler} />
         <Header onClick={showMenuHandler} title='Posts' buttonText='Menu' />
         <SearchWrapper>
-          <Search
-            placeholder="Search"
-            value={searchValue}
-            onChange={(e) => {
-              setElementsPerStep(0);
-              setSearchValue(e.target.value);
-              setStartIndexForPagination(1);
-            }}
-          />
-
-          <Button
-            variant="light"
-            onClick={() => { 
-              setSearchValue('');
-              setElementsPerStep(0);
-              setStartIndexForPagination(1);
-            }}>
-            <img src={clearIcon} alt="Очистка" width={30}/>
-          </Button>
+          <Search>
+            <SearchInput
+              placeholder="Search"
+              value={searchValue}
+              onChange={(e) => {
+                setElementsPerStep(0);
+                setSearchValue(e.target.value);
+                setStartIndexForPagination(1);
+              }}
+            />
+            <Button
+              variant="light"
+              onClick={() => { 
+                setSearchValue('');
+                setElementsPerStep(0);
+                setStartIndexForPagination(1);
+              }}>
+              <img src={clearIcon} alt="Очистка" width={30}/>
+            </Button>
+        </Search>
         
+          <Sort size='lg'>
+            <Dropdown.Toggle>Sorting by title ({sortType})</Dropdown.Toggle>
+            <Dropdown.Menu onClick={(e) => setSortType(e.target.innerText)}>
+              {Object.values(SORTING).map((el) =>
+                <Dropdown.Item key={el}>{el}</Dropdown.Item>
+              )}
+            </Dropdown.Menu>
+          </Sort>
         </SearchWrapper>
         
         {isLoading
@@ -88,31 +99,33 @@ function Main() {
                 <PostCard
                   key={post.id}
                   post={post}
+                  isHaveLink={true}
                   commentsButtonClick={() => showCommentsHandler(post.id)}
                   isShowComments={isOpenComments && postIdWithOpenedComments === post.id}
                 />
               ))}
           </CardWrapper>
         }
+      
+      {posts?.length === 0 && searchValue && <NotFoundMessage>Ничего не найдено.</NotFoundMessage>}
 
-        <Pagination size='lg'>
-          <Pagination.Prev
-            disabled={startIndexForPagination === 1}
-            onClick={() => {
-              setElementsPerStep(elementsPerStep- step);
-              setStartIndexForPagination(startIndexForPagination - 1);
-            }} />
-
-          <Pagination.Item>{startIndexForPagination}</Pagination.Item>
-          
-          <Pagination.Next
-            disabled={startIndexForPagination === Math.ceil(postsCount / 5)}
-            onClick={() => {
-              setElementsPerStep(elementsPerStep + step);
-              setStartIndexForPagination(startIndexForPagination + 1);
-            }} />
-        </Pagination>
-
+        {posts?.length > 0 && 
+          <Pagination size='lg'>
+            <Pagination.Prev
+              disabled={startIndexForPagination === 1}
+              onClick={() => {
+                setElementsPerStep(elementsPerStep - ELEMENTS_PER_STEP);
+                setStartIndexForPagination(startIndexForPagination - 1);
+              }} />
+            <Pagination.Item>{startIndexForPagination}</Pagination.Item>
+            <Pagination.Next
+              disabled={startIndexForPagination === Math.ceil(postsCount / 5)}
+              onClick={() => {
+                setElementsPerStep(elementsPerStep + ELEMENTS_PER_STEP);
+                setStartIndexForPagination(startIndexForPagination + 1);
+              }} />
+          </Pagination>
+        }
       </PageWrapper>
   );
 }

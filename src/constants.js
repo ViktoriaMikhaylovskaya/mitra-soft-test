@@ -20,3 +20,11 @@ export const ROUTE_LIST = [
     component: <Main />,
   },
 ]
+
+export const SORTING = {
+    DEFAULT: 'default',
+    ASC: 'asc',
+    DESC: 'desc',
+}
+
+export const ELEMENTS_PER_STEP = 5;

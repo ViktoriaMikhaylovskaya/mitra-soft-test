@@ -1,13 +1,14 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { ACTIONS } from '../constants';
-import { getUserPosts } from '../../api';
+import { getUserPosts, getCountUserPosts } from '../../api';
 import { setUserPosts } from '../actions/actionCreator';
 
 
 export function* fetchUserPostsWorker(action) {
-    yield put(setUserPosts({loading: true}));
-    const data = yield call(getUserPosts, action.id);
-    yield put(setUserPosts({data, loading: false}));
+    yield put(setUserPosts({ loading: true }));
+    const response = yield call(getCountUserPosts, action.queries.id);
+    const data = yield call(getUserPosts, action.queries);
+    yield put(setUserPosts({data, loading: false, countUserPosts: response.length}));
 }
 
 export function* userPostsWatcher() {

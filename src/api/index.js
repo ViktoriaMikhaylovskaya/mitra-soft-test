@@ -6,7 +6,7 @@ export const getCountPosts = async (searchValue) => {
 }
 
 export const getPosts = async (queries) => {
-    const response = await fetch(`${URL}${queries.searchValue}${queries.page}`);
+    const response = await fetch(`${URL}${queries.page}${queries.searchValue}${queries.sort}`);
     return await response.json();
 }
 
@@ -15,7 +15,12 @@ export const getComments = async (id) => {
     return await response.json();
 }
 
-export const getUserPosts = async (id) => {
+export const getUserPosts = async (queries) => {
+    const response = await fetch(`${URL}?userId=${queries.id}${queries.page}${queries.searchValue}${queries.sort}`);
+    return await response.json();
+}
+
+export const getCountUserPosts = async (id) => {
     const response = await fetch(`${URL}?userId=${id}`);
     return await response.json();
 }
